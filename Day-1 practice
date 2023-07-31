@@ -1,0 +1,12 @@
+import boto3
+
+def s3_resource(s3_object):
+    response=s3_object.buckets.all()
+    for i in response:
+        print(i.name)
+
+def main():
+    s3_object = boto3.resource('s3')
+    s3_resource(s3_object)
+
+main()

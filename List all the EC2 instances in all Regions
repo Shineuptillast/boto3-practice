@@ -1,0 +1,27 @@
+import boto3
+
+list_of_regions=[]
+
+def s3_resource(s3_object):
+    response=s3_object.buckets.all()
+    for i in response:
+        print(i.name)
+
+def ec2_resource(ec2_object):
+    for each_region in ec2_object.describe_regions()['Regions']:
+        list_of_regions.append(each_region['RegionName'])
+
+
+def main():
+
+    session = boto3.Session(profile_name="default")
+    ec2_object = session.resource('ec2')
+    ec2_object_c=session.client('ec2')
+    ec2_resource(ec2_object_c)
+    print(list_of_regions)
+    for region in list_of_regions:
+        session =boto3.Session(profile_name="default",region_name=region)
+        ec2_re_obj=session.resource('ec2')
+        for instance in ec2_re_obj.instances.all():
+            print(f"This is EC2 Instance for {region}:",instance)
+main()

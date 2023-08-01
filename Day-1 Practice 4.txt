@@ -1,0 +1,20 @@
+import boto3
+import pprint
+
+def s3_resource(s3_object):
+    response=s3_object.buckets.all()
+    for i in response:
+        print(i.name)
+
+def ec2_resource(ec2_object):
+    for instance in ec2_object.describe_instances()['Reservations']:
+        print(instance['Instances'][0]['InstanceId'],instance['Instances'][0]['InstanceType'],instance['Instances'][0]['KeyName'])
+
+def main():
+    session = boto3.Session(profile_name="default")
+    ec2_object = session.resource('ec2')
+    ec2_object_c=session.client('ec2')
+    ec2_resource(ec2_object_c)
+
+
+main()

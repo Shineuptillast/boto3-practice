@@ -1,0 +1,26 @@
+import boto3
+import uuid
+
+def create_bucket_name(bucket_prefix):
+    bucket_name = bucket_prefix + str(uuid.uuid4())
+    return bucket_name
+
+
+def s3_bucket_creation(bucket_prefix, s3_object):
+    bucket_name = create_bucket_name(bucket_prefix)
+    session = boto3.Session(profile_name="default")
+    region=session.region_name
+    response = s3_object.create_bucket(Bucket=bucket_name)
+
+    print(response)
+
+def main(bucket_prefix_1):
+
+    session = boto3.Session(profile_name="default")
+    s3_object = session.resource('s3')
+    print("Creating a bucket")
+    s3_bucket_creation(bucket_prefix_1,s3_object)
+
+
+
+main('my-first-bucket')

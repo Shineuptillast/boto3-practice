@@ -1,0 +1,12 @@
+import boto3
+import uuid
+
+def main():
+    s3_resource = boto3.resource('s3')
+    try:
+        response=s3_resource.Bucket('my-s3-bucket-biop').upload_file(Filename='./wp383267.jpg', Key="Wallpaper.jpg")
+        print(response)
+    except Exception as err:
+        print(err)
+
+main()

@@ -1,0 +1,12 @@
+import boto3
+import uuid
+
+def main():
+    s3_resource = boto3.resource('s3')
+    try:
+        response=s3_resource.Object("my-s3-bucket-biop","Day2-practice1.txt").upload_file(Filename="./Day2/Day2-practice1.txt")
+        print(response)
+    except Exception as err:
+        print(err)
+
+main()

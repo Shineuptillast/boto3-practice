@@ -1,0 +1,16 @@
+import boto3
+import uuid
+
+def main():
+    s3_resource = boto3.resource('s3')
+    try:
+        data_source={
+            'Bucket':"my-s3-bucket-biop",
+            'Key':'helllo.jpg'
+        }
+        response=s3_resource.Object('hello-bucket-bucket','Wallpaper.jpg').copy(data_source)
+        print(response)
+    except Exception as err:
+        print(err)
+
+main()

@@ -1,0 +1,13 @@
+import boto3
+
+ec2_resource = boto3.resource('ec2')
+
+instances = ec2_resource.create_instances(
+    MinCount=2,
+    MaxCount=2,
+    InstanceType='t2.micro',
+    ImageId='ami-0f34c5ae932e6f0e4',
+    KeyName='Keypair')
+
+for instance in instances:
+    print(instance.id)

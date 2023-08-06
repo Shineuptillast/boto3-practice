@@ -1,0 +1,30 @@
+import boto3
+
+session = boto3.Session(profile_name='default')
+
+def create_standard_queue(queue_name, delay_sec, visibility_timeout):
+
+    try:
+        sqs_resource = session.resource('sqs')
+
+        sqs_response = sqs_resource.create_queue(QueueName=queue_name,
+                                             Attributes={
+                                                 'DelaySeconds':delay_sec,
+                                                 'VisibilityTimeout':visibility_timeout})
+    except Exception as err:
+        print(err)
+        exit()
+
+    return sqs_response
+
+
+def main():
+    queue_name='first-sqs'
+    delay_sec='0'
+    visibility_timeout='60'
+    response = create_standard_queue(queue_name, delay_sec, visibility_timeout)
+    print(response)
+    print(f'Queue is created {queue_name} with url {response.url}')
+
+if __name__=="__main__":
+   main()

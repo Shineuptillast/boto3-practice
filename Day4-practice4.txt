@@ -1,0 +1,28 @@
+import boto3
+
+session = boto3.Session(profile_name='default')
+# Creating FIFO Queue
+
+
+def list_all_queues():
+
+    sqs_resource = session.resource('sqs')
+    response = sqs_resource.queues.all()
+    return response
+
+def filter_queue(queue_prefix):
+    sqs_resource = session.resource('sqs')
+    response = sqs_resource.queues.filter(QueueNamePrefix=queue_prefix)
+    return response
+
+def main():
+
+    response = filter_url('first-fi')
+    print(response)
+    for i in response:
+        print(i.url)
+        print(i)
+
+
+if __name__=="__main__":
+   main()

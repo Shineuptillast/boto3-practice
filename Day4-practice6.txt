@@ -1,0 +1,23 @@
+import boto3
+
+session = boto3.Session(profile_name='default')
+# Creating FIFO Queue
+
+
+def delete_queue(queue_name):
+    sqs_resource = session.client('sqs')
+    response = sqs_resource.delete_queue(QueueUrl=queue_name)
+    print(response)
+
+
+
+
+
+
+def main():
+
+    delete_queue('first-fifo-queue.fifo')
+
+
+if __name__=="__main__":
+   main()

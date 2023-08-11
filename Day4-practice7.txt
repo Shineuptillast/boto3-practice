@@ -1,0 +1,18 @@
+import boto3
+
+session = boto3.Session(profile_name='default')
+
+def get_queue_by_name(queue_name):
+    sqs_resource = session.resource('sqs')
+    response = sqs_resource.get_queue_by_name(QueueName=queue_name)
+    return response
+
+
+
+def main():
+
+    print(get_queue_by_name('first-sqs'))
+
+
+if __name__=="__main__":
+   main()

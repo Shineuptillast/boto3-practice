@@ -1,0 +1,19 @@
+import boto3
+
+session = boto3.Session(profile_name='default')
+
+def queue():
+    sqs_resource = session.resource('sqs')
+    queue = sqs_resource.Queue('https://sqs.us-east-1.amazonaws.com/692687583408/first-queue-std')
+    return queue
+def recieve(queue):
+    msg=queue.receive_messages(WaitTimeSeconds=10)
+    print(msg)
+def delete(queue):
+    queue.delete()
+def main():
+    delete(queue())
+
+
+if __name__=="__main__":
+   main()

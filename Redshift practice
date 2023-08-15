@@ -15,3 +15,23 @@ grant select on table employee to naman;
 grant insert on table employee to naman;
 
 create schema myschema authorization naman;
+
+drop table myschema.sales_data;
+
+create table myschema.sales_data(
+    row_id smallint distkey,
+    order_id varchar(30),
+    order_date varchar(100),
+    ship_mode varchar(40),
+    cust_id varchar(40),
+    cust_name varchar(50),
+    country varchar(100),
+    product_id varchar(60),
+    category varchar(50),
+    product_name varchar(50),
+    sales float)
+    Compound SORTKEY(cust_name,product_name)
+
+select * from myschema.sales_data;
+
+copy myschema.sales_data from 's3://reshift-data-data/sales_data.csv' IAM_ROLE 'arn:aws:iam::692687583408:role/service-role/AmazonRedshift-CommandsAccessRole-20230815T103244' delimiter ',' IGNOREHEADER 1;

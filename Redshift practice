@@ -1,0 +1,17 @@
+select * from pg_database;
+
+select * from employee;
+
+create database my_db;
+
+create user naman password 'Naman080';
+
+select current_user;
+
+select * from pg_namespace;
+
+grant select on table employee to naman;
+
+grant insert on table employee to naman;
+
+create schema myschema authorization naman;

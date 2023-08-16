@@ -34,4 +34,4 @@ create table myschema.sales_data(
 
 select * from myschema.sales_data;
 
-copy myschema.sales_data from 's3://reshift-data-data/sales_data.csv' IAM_ROLE 'arn:aws:iam::692687583408:role/service-role/AmazonRedshift-CommandsAccessRole-20230815T103244' delimiter ',' IGNOREHEADER 1;
+copy myschema.sales_data from 's3://reshift-data-data/sales_data.csv' IAM_ROLE 'arn:aws:iam::692687583408:role/service-role/AmazonRedshift-CommandsAccessRole-20230815T103244' delimiter ',' IGNOREHEADER 1 format 'csv';

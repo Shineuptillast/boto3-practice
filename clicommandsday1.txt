@@ -1,0 +1,72 @@
+create database hive_class_b1;
+use hive_class_b1;
+
+create table dept_data(
+dept_id int,
+dept_name string,
+manager_id int,
+salary int
+)
+row format delimited
+fields terminated by ',';
+
+describe hive_class_b1;
+
+show tables;
+show databases;
+
+describe formatted dept_data;
+
+load data local inpath 'file:///home/cloudera/hive_class_lab/dept_data.csv' into table dept_data;
+
+
+select * from dept_data;
+
+select count(*) from dept_data;
+
+create table dept_data_hdfs(
+dept_id,
+dept_name string,
+mang_id int,
+salary int
+)
+row format delimited
+fields terminated by ',';
+
+load data inpath 'user/hive_lab' into table dept_data_hdfs;
+
+create external table dept_data_external(
+     dept_id int,
+     dept_name string,
+     mang_id int,
+     salary int
+     )
+     row format delimited
+     fields terminated by ','
+     location '/tmp/hive_class_lab/';
+
+
+
+create table employee(
+id int,
+name string,
+skills array<string>
+)
+row format delimited 
+fields terminated by','
+collection items terminated by ':';
+
+load data local inpath 'file:///home/cloudera/Desktop/array_data.csv' into table employee;
+
+create table map_data(
+id int,
+name string,
+details map<string,string>
+)
+row format delimited
+fields terminated by ','
+collection items terminated by '|'
+map keys terminated by ':';
+
+load data local inpath "file;///home/cloudera/Desktop/map_data.csv" into table map_data;
+
